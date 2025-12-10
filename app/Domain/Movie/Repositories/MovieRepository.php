@@ -3,7 +3,14 @@
 namespace App\Domain\Movie\Repositories;
 
 use App\Application\Movie\Entities\Movie;
+use App\Domain\Movie\DTOs\AllMovieDTO;
+use App\Domain\Movie\ValueObjects\Description;
+use App\Domain\Movie\ValueObjects\Duration;
+use App\Domain\Movie\ValueObjects\Genre;
+use App\Domain\Movie\ValueObjects\ReleaseDate;
+use App\Domain\Movie\ValueObjects\Title;
 use App\Models\MovieModel;
+use Carbon\Carbon;
  
 
 class MovieRepository implements MovieRepositoryInterface
@@ -19,17 +26,21 @@ class MovieRepository implements MovieRepositoryInterface
         $movieModel->save();
         return $movie;
     }
-
-    public function all(): Movie
+ 
+    public function all(AllMovieDTO $allMovieDTO): array
     {
         $movieModel = MovieModel::all();
 
-        return new Movie(
-            $movieModel->title,
-            $movieModel->description,
-            $movieModel->duration,
-            $movieModel->release_date,
-            $movieModel->genre
-        );
+        $movie = $movieModel->map(function($model) {
+            return new Movie(
+                new Title($model->title),
+                new Description($model->description),
+                new Duration($model->duration),
+                new ReleaseDate(Carbon::parse($model->release_date)->format("Y-m-d")),
+                new Genre($model->genre)
+            );
+        });
+ 
+        return $movie->toArray();
     }
 }

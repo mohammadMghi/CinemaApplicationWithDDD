@@ -35,7 +35,7 @@ class MovieService
         $this->createMovieHandler->handle($createMovieCommand);
     }
 
-    public function all($data): Movie
+    public function all($data): array
     {
         $allMovieCommand = new AllMoviesQuery(
             $data["page"],
