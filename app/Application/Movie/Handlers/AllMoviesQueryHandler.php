@@ -19,8 +19,7 @@ class AllMoviesQueryHandler
                 $query->limit,
                 $query->page
             )
-        );
-
+        ); 
         return $movies;  
     }
 }

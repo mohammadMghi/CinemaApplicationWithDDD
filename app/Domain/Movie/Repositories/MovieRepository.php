@@ -31,7 +31,7 @@ class MovieRepository implements MovieRepositoryInterface
     {
         $movieModel = MovieModel::all();
 
-        $movie = $movieModel->map(function($model) {
+        $movies = $movieModel->map(function($model) {
             return new Movie(
                 new Title($model->title),
                 new Description($model->description),
@@ -41,6 +41,6 @@ class MovieRepository implements MovieRepositoryInterface
             );
         });
  
-        return $movie->toArray();
+        return $movies->toArray();
     }
 }

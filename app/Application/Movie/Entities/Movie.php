@@ -29,4 +29,15 @@ class Movie
         $this->releaseDate = $releaseDate;
         $this->genres = $genres;
     }
+
+    public function toSerialize() : array
+    {
+        return [
+            'title' => $this->title->value(),
+            'description' => $this->description->value(),
+            'duration' => $this->duration->value(),
+            'releaseDate' => $this->releaseDate->value()->format('Y-m-d'),
+            'genres' => $this->genres->value(),
+        ];
+    }
 }
