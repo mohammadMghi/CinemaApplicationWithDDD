@@ -11,5 +11,6 @@ interface MovieRepositoryInterface
 { 
     public function create(Movie $movie): Movie;
     public function all(AllMovieDTO $allMovieDTO): array; 
- 
+
+    public function update(int $id ,Movie $movie): Movie;
 }

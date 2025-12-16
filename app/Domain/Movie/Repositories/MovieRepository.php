@@ -43,4 +43,16 @@ class MovieRepository implements MovieRepositoryInterface
  
         return $movies->toArray();
     }
+
+    public function update(int $id ,Movie $movie): Movie
+    {
+        $movieModel = MovieModel::find($id);
+        $movieModel->title = $movie->title->value();
+        $movieModel->description = $movie->description->value();
+        $movieModel->genre = $movie->genres->value(); 
+        $movieModel->duration = $movie->duration->value();
+        $movieModel->release_date = $movie->releaseDate->value();
+        $movieModel->update();
+        return $movie;
+    }
 }
