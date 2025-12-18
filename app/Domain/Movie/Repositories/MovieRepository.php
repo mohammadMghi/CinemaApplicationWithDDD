@@ -55,4 +55,11 @@ class MovieRepository implements MovieRepositoryInterface
         $movieModel->update();
         return $movie;
     }
+
+    public function delete($id)
+    {
+        $movie = MovieModel::find($id);
+
+        $movie->delete();
+    }
 }
