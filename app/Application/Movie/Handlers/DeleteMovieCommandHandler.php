@@ -13,6 +13,6 @@ class DeleteMovieCommandHandler
 
     public function handle(DeleteMovieCommand $command): void
     {
-        return $this->movieRepository->delete($command->id);
+        $this->movieRepository->delete($command->id);
     }
 }
