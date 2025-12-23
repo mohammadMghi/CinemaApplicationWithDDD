@@ -2,22 +2,28 @@
 
 namespace App\Application\Movie\Commands;
 
+use App\Domain\Movie\ValueObjects\Description;
+use App\Domain\Movie\ValueObjects\Duration;
+use App\Domain\Movie\ValueObjects\Genre;
+use App\Domain\Movie\ValueObjects\ReleaseDate;
+use App\Domain\Movie\ValueObjects\Title;
+
 class UpdateMovieCommand
 {
     public int $id;
-    public string $title;
-    public int $duration; 
-    public string $releaseDate;
-    public string $genre; 
-    public ?string $description;
+    public Title $title;
+    public Duration $duration; 
+    public ReleaseDate $releaseDate;
+    public Genre $genre; 
+    public ?Description $description;
 
     public function __construct(
         int $id,
-        string $title,
-        int $duration,
-        string $releaseDate,
-        string $genre,
-        ?string $description = null,
+        Title $title,
+        Duration $duration,
+        ReleaseDate $releaseDate,
+        Genre $genre,
+        ?Description $description = null,
     ) {
         $this->id = $id;
         $this->title = $title;

@@ -13,7 +13,12 @@ use App\Application\Movie\Handlers\CreateMovieCommandHandler;
 use App\Application\Movie\Handlers\DeleteMovieCommandHandler;
 use App\Application\Movie\Handlers\FindMovieByIDCommandHandler;
 use App\Application\Movie\Handlers\UpdateMovieCommandHandler;
-use App\Application\Movie\Queries\AllMoviesQuery; 
+use App\Application\Movie\Queries\AllMoviesQuery;
+use App\Domain\Movie\ValueObjects\Description;
+use App\Domain\Movie\ValueObjects\Duration;
+use App\Domain\Movie\ValueObjects\Genre;
+use App\Domain\Movie\ValueObjects\ReleaseDate;
+use App\Domain\Movie\ValueObjects\Title; 
 
 class MovieService
 {
@@ -42,11 +47,11 @@ class MovieService
     public function create($data)
     {
         $createMovieCommand = new CreateMovieCommand(
-            $data["title"],
-            $data["duration"],
-            $data["release_date"],
-            $data["genres"],
-            $data["description"],
+            new Title($data["title"]), 
+            new Duration($data["duration"]),
+            new ReleaseDate($data["release_date"]),
+            new Genre($data["genres"]),
+            new Description($data["description"]),
         );
 
         $this->createMovieHandler->handle($createMovieCommand);
@@ -66,11 +71,11 @@ class MovieService
     {
         $updateMovieCommand = new UpdateMovieCommand(
             $id,
-            $data['title'],
-            $data['duration'],
-            $data['release_date'],
-            $data['genres'],
-            $data['description'],
+            new Title($data['title']),
+            new Duration($data['duration']),
+            new ReleaseDate($data['release_date']),
+            new Genre($data['genres']),
+            new Description($data['description']),
         );
 
         return $this->updateMovieCommandHandler->handle($updateMovieCommand);
@@ -85,7 +90,9 @@ class MovieService
 
     public function findByID(int $id)
     {
-        $findMovieByIDCommnad = new FindMovieByIDCommand($id);
+        $user = auth()->user();
+        
+        $findMovieByIDCommnad = new FindMovieByIDCommand($id,$user->id);
 
         return $this->findMovieByIDCommandHandler->handle($findMovieByIDCommnad);
     }
