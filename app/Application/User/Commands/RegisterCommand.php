@@ -4,16 +4,16 @@ namespace App\Application\User\Commands;
 
 use App\Domain\User\ValueObjects\Email;
 use App\Domain\User\ValueObjects\Fullname;
-use App\Domain\User\ValueObjects\Password;
+use App\Domain\User\ValueObjects\PasswordHash;
 
 class RegisterCommand
 {
     public Fullname $fullname;
     public Email $email;
-    public Password $password;
+    public PasswordHash $password;
 
 
-    public function __construct(Fullname $fullname, Email $email, Password $password)
+    public function __construct(Fullname $fullname, Email $email, PasswordHash $password)
     {
         $this->fullname = $fullname;
         $this->email = $email;

@@ -2,12 +2,14 @@
 
 namespace App\Domain\User\Repositories;
 
+use App\Application\User\Entities\User;
 use App\Models\UserModel;
 
-class UserRepository
+class UserRepository implements UserRepositoryInterface
 {
-    public function find($id)
+    public function find($id) : User
     {
-        return UserModel::find($id);
+        $user = UserModel::find($id);
+        
     }
 }

@@ -3,13 +3,13 @@
 namespace App\Application\User\Commands;
 
 use App\Domain\User\ValueObjects\Email;
-use App\Domain\User\ValueObjects\Password;
+use App\Domain\User\ValueObjects\PasswordHash;
 
 class UserLoginCommand
 {
     public Email $email;
-    public Password $password;
-    public function __construct(Email $email,Password $password)
+    public PasswordHash $password;
+    public function __construct(Email $email,PasswordHash $password)
     {
         $this->email = $email;
         $this->password = $password;
