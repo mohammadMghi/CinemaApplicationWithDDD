@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Movie\AllMovieController;
 use App\Http\Controllers\Movie\CreateMovieController;
 use App\Http\Controllers\Movie\UpdateMovieController;
@@ -14,3 +15,5 @@ Route::get('/user', function (Request $request) {
 Route::post('/movie',[CreateMovieController::class , 'index']);
 Route::get('/movie',[AllMovieController::class , 'index']);
 Route::put('/movie',[UpdateMovieController::class , 'index']);
+
+Route::put('/login',[UserLoginController::class , 'index']);

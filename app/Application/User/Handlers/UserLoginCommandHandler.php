@@ -19,7 +19,7 @@ class UserLoginCommandHandler
         )
     {}
 
-    public function handle(UserLoginCommand $command)
+    public function handle(UserLoginCommand $command): AuthResultDTO
     {   
         $user = $this->userRepository->find($command->email->value());
         
