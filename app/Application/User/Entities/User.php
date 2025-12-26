@@ -10,14 +10,14 @@ use App\Domain\User\ValueObjects\UserID;
 class User
 {
     public function __construct(
-        private UserID $userID,
-        private Fullname $name,
-        private PasswordHash $password,
+        private ?UserID $userID,
+        private Fullname $fullname,
+        private $password,
         private Email $email
     )
     {}
 
-    public function password() : PasswordHash
+    public function password() : string
     {
         return $this->password;
     }
@@ -25,5 +25,15 @@ class User
     public function id() : UserID
     {
         return $this->userID;
+    }
+
+    public function fullname() : Fullname
+    {
+        return $this->fullname;
+    }
+
+    public function email() : Email
+    {
+        return $this->email;
     }
 }
